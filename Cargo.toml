@@ -1,0 +1,15 @@
+[package]
+name = "badger-rs"
+version = "0.0.1"
+authors = [ "Andreas Doerr" ]
+description = "Firmware for the Pimoroni 2040"
+repository = "https://github.com/adoerr/badger-rs.git"
+license = "GPL-3.0-only"
+edition = "2021"
+readme = "README.md"
+keywords = ["firmware", "RP2040", "eInk"]
+categories = ["embedded-development"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
