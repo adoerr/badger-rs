@@ -17,6 +17,7 @@ cortex-m = "0.7"
 cortex-m-rt = "0.7"
 embedded-hal = { version = "0.2", features = ["unproven"] }
 embedded-time = "0.12"
+panic-halt = "0.2"
 
 # this shoudl become badger specifc
 rp-pico = "0.3.0"
