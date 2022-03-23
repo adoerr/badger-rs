@@ -6,7 +6,6 @@
 #![no_main]
 
 use cortex_m_rt::entry;
-use defmt::*;
 use defmt_rtt as _;
 use embedded_hal::digital::v2::OutputPin;
 use embedded_time::fixed_point::FixedPoint;
@@ -26,7 +25,6 @@ use bsp::hal::{
 
 #[entry]
 fn main() -> ! {
-    info!("Program start");
     let mut pac = pac::Peripherals::take().unwrap();
     let core = pac::CorePeripherals::take().unwrap();
     let mut watchdog = Watchdog::new(pac.WATCHDOG);
@@ -58,10 +56,12 @@ fn main() -> ! {
     let mut led_pin = pins.led.into_push_pull_output();
 
     loop {
-        info!("on!");
         led_pin.set_high().unwrap();
         delay.delay_ms(500);
-        info!("off!");
+        led_pin.set_low().unwrap();
+        delay.delay_ms(100);
+        led_pin.set_high().unwrap();
+        delay.delay_ms(100);
         led_pin.set_low().unwrap();
         delay.delay_ms(500);
     }
