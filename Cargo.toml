@@ -13,14 +13,16 @@ categories = ["embedded-development"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-cortex-m = "0.7"
-cortex-m-rt = "0.7"
+cortex-m = { version = "0.7" }
+cortex-m-rt = { version = "0.7" }
+defmt = { version = "0.3" }
+defmt-rtt = { version = "0.3" }
 embedded-hal = { version = "0.2", features = ["unproven"] }
-embedded-time = "0.12"
-panic-halt = "0.2"
+embedded-time = { version = "0.12" }
+panic-probe = { version = "0.3.0", features = ["print-defmt"] }
 
 # this shoudl become badger specifc
-rp-pico = "0.3.0"
+rp-pico = "0.3"
 
 # cargo build/run
 [profile.dev]
