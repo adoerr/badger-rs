@@ -1,7 +1,7 @@
 [package]
 name = "badger-rs"
 version = "0.0.1"
-authors = [ "Andreas Doerr" ]
+authors = ["Andreas Doerr"]
 description = "Firmware for the Pimoroni 2040"
 repository = "https://github.com/adoerr/badger-rs.git"
 license = "GPL-3.0-only"
@@ -11,15 +11,15 @@ keywords = ["firmware", "RP2040", "eInk"]
 categories = ["embedded-development"]
 
 [dependencies]
-cortex-m = "0.7.2"
-rp2040-boot2 = { version = "0.2.0", optional = true }
-rp2040-hal = { version = "0.7.0"}
-cortex-m-rt = { version = "0.7", optional = true }
-fugit = "0.3.5"
-embedded-hal ="0.2.5"
-pimoroni_badger2040 = { version = "0.3.0" }
-panic-halt = { version = "0.2.0" }
+cortex-m = { sversion = "0.7.2" }
+cortex-m-rt = { version = "0.7.2", optional = true }
+embedded-hal = { version = "0.2.5" }
+fugit = { version = "0.3.5" }
 nb = { version = "1.0" }
+panic-halt = { version = "0.2.0" }
+pimoroni_badger2040 = { version = "0.3.0" }
+rp2040-boot2 = { version = "0.2.1", optional = true }
+rp2040-hal = { version = "0.7.0" }
 
 [features]
 # This is the set of features we enable by default
@@ -32,7 +32,7 @@ critical-section-impl = ["rp2040-hal/critical-section-impl"]
 boot2 = ["rp2040-boot2"]
 
 # Minimal startup / runtime for Cortex-M microcontrollers
-rt = ["cortex-m-rt","rp2040-hal/rt"]
+rt = ["cortex-m-rt", "rp2040-hal/rt"]
 
 # This enables a fix for USB errata 5: USB device fails to exit RESET state on busy USB bus.
 # Only required for RP2040 B0 and RP2040 B1, but it also works for RP2040 B2 and above
