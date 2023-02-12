@@ -1,28 +1,13 @@
 #![no_std]
 #![no_main]
 
-// The macro for our start-up function
-use pimoroni_badger2040::entry;
-
-// GPIO traits
-use embedded_hal::digital::v2::OutputPin;
-
-// Ensure we halt the program on panic (if we don't mention this crate it won't
-// be linked)
-use panic_halt as _;
-
-// A shorter alias for the Peripheral Access Crate, which provides low-level
-// register access
-use pimoroni_badger2040::hal::pac;
-use pimoroni_badger2040::hal::Timer;
-
-// A shorter alias for the Hardware Abstraction Layer, which provides
-// higher-level drivers.
-use pimoroni_badger2040::hal;
-
-// A few traits required for using the CountDown timer
-use embedded_hal::timer::CountDown;
+use embedded_hal::{digital::v2::OutputPin, timer::CountDown};
 use fugit::ExtU32;
+use panic_halt as _;
+use pimoroni_badger2040::{
+    entry, hal,
+    hal::{pac, Timer},
+};
 
 #[entry]
 fn main() -> ! {
@@ -44,8 +29,8 @@ fn main() -> ! {
         &mut pac.RESETS,
         &mut watchdog,
     )
-        .ok()
-        .unwrap();
+    .ok()
+    .unwrap();
 
     // The single-cycle I/O block controls our GPIO pins
     let sio = hal::Sio::new(pac.SIO);

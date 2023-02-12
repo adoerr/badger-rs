@@ -11,7 +11,7 @@ keywords = ["firmware", "RP2040", "eInk"]
 categories = ["embedded-development"]
 
 [dependencies]
-cortex-m = { sversion = "0.7.2" }
+cortex-m = { version = "0.7.2" }
 cortex-m-rt = { version = "0.7.2", optional = true }
 embedded-hal = { version = "0.2.5" }
 fugit = { version = "0.3.5" }
