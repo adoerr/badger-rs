@@ -15,5 +15,8 @@
 # Ignore VSCode stuff
 #**/.vscode
 
+# Ignore CLion stuff
+**/.idea
+
 # Added by cargo
 /target

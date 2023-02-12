@@ -1,39 +1,42 @@
-//! Blinks the LED on a Pico board
-//!
-//! This will blink an LED attached to GP25, which is the pin the Pico uses for the on-board LED.
-
 #![no_std]
 #![no_main]
 
-use cortex_m_rt::entry;
-use defmt_rtt as _;
+// The macro for our start-up function
+use pimoroni_badger2040::entry;
+
+// GPIO traits
 use embedded_hal::digital::v2::OutputPin;
-use embedded_time::fixed_point::FixedPoint;
-use panic_probe as _;
 
-// Provide an alias for our BSP so we can switch targets quickly.
-// Uncomment the BSP you included in Cargo.toml, the rest of the code does not need to change.
-use rp_pico as bsp;
-// use sparkfun_pro_micro_rp2040 as bsp;
+// Ensure we halt the program on panic (if we don't mention this crate it won't
+// be linked)
+use panic_halt as _;
 
-use bsp::hal::{
-    clocks::{init_clocks_and_plls, Clock},
-    pac,
-    sio::Sio,
-    watchdog::Watchdog,
-};
+// A shorter alias for the Peripheral Access Crate, which provides low-level
+// register access
+use pimoroni_badger2040::hal::pac;
+use pimoroni_badger2040::hal::Timer;
+
+// A shorter alias for the Hardware Abstraction Layer, which provides
+// higher-level drivers.
+use pimoroni_badger2040::hal;
+
+// A few traits required for using the CountDown timer
+use embedded_hal::timer::CountDown;
+use fugit::ExtU32;
 
 #[entry]
 fn main() -> ! {
+    // Grab our singleton objects
     let mut pac = pac::Peripherals::take().unwrap();
-    let core = pac::CorePeripherals::take().unwrap();
-    let mut watchdog = Watchdog::new(pac.WATCHDOG);
-    let sio = Sio::new(pac.SIO);
 
-    // External high-speed crystal on the pico board is 12Mhz
-    let external_xtal_freq_hz = 12_000_000u32;
-    let clocks = init_clocks_and_plls(
-        external_xtal_freq_hz,
+    // Set up the watchdog driver - needed by the clock setup code
+    let mut watchdog = hal::Watchdog::new(pac.WATCHDOG);
+
+    // Configure the clocks
+    //
+    // The default is to generate a 125 MHz system clock
+    let _clocks = hal::clocks::init_clocks_and_plls(
+        pimoroni_badger2040::XOSC_CRYSTAL_FREQ,
         pac.XOSC,
         pac.CLOCKS,
         pac.PLL_SYS,
@@ -41,28 +44,37 @@ fn main() -> ! {
         &mut pac.RESETS,
         &mut watchdog,
     )
-    .ok()
-    .unwrap();
+        .ok()
+        .unwrap();
 
-    let mut delay = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().integer());
+    // The single-cycle I/O block controls our GPIO pins
+    let sio = hal::Sio::new(pac.SIO);
 
-    let pins = bsp::Pins::new(
+    // Set the pins up according to their function on this particular board
+    let pins = pimoroni_badger2040::Pins::new(
         pac.IO_BANK0,
         pac.PADS_BANK0,
         sio.gpio_bank0,
         &mut pac.RESETS,
     );
 
+    // Configure the timer peripheral to be a CountDown timer for our blinky delay
+    let timer = Timer::new(pac.TIMER, &mut pac.RESETS);
+    let mut delay = timer.count_down();
+
+    // Set the LED to be an output
     let mut led_pin = pins.led.into_push_pull_output();
 
+    // Blink the LED at 1 Hz
     loop {
+        // LED on, and wait for 500ms
         led_pin.set_high().unwrap();
-        delay.delay_ms(500);
+        delay.start(500.millis());
+        let _ = nb::block!(delay.wait());
+
+        // LED off, and wait for 500ms
         led_pin.set_low().unwrap();
-        delay.delay_ms(100);
-        led_pin.set_high().unwrap();
-        delay.delay_ms(100);
-        led_pin.set_low().unwrap();
-        delay.delay_ms(500);
+        delay.start(500.millis());
+        let _ = nb::block!(delay.wait());
     }
 }
