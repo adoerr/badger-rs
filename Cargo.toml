@@ -12,12 +12,12 @@ categories = ["embedded-development"]
 
 [dependencies]
 cortex-m = { version = "0.7.2" }
-cortex-m-rt = { version = "0.7.2" }
+cortex-m-rt = { version = "0.7.3" }
 embedded-hal = { version = "0.2.5", features = ["unproven"] }
 defmt = { version = "0.3.2" }
 defmt-rtt = { version = "0.4.0" }
 panic-probe = { version = "0.3.0", features = ["print-defmt"] }
-pimoroni_badger2040 = { version = "0.3.0" }
+pimoroni_badger2040 = { version = "0.4.0" }
 
 # cargo build/run
 [profile.dev]
