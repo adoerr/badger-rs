@@ -1,11 +1,14 @@
 [target.'cfg(all(target_arch = "arm", target_os = "none"))']
-runner = "elf2uf2-rs -d"
+runner = "probe-rs run --chip RP2040 --protocol swd"
 
 rustflags = [
   "-C", "linker=flip-link",
   "-C", "link-arg=--nmagic",
   "-C", "link-arg=-Tlink.x",
   "-C", "link-arg=-Tdefmt.x",
+
+
+  "-Z", "trap-unreachable=no",
   "-C", "inline-threshold=5",
   "-C", "no-vectorize-loops",
 ]
@@ -15,4 +18,3 @@ target = "thumbv6m-none-eabi"
 
 [env]
 DEFMT_LOG = "debug"
-

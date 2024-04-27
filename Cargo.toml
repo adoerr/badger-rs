@@ -8,16 +8,16 @@ license = "GPL-3.0-only"
 edition = "2021"
 readme = "README.md"
 keywords = ["firmware", "RP2040", "eInk"]
-categories = ["embedded-development"]
+categories = ["embedded", "hardware-support"]
 
 [dependencies]
-cortex-m = { version = "0.7.2" }
-cortex-m-rt = { version = "0.7.3" }
-embedded-hal = { version = "0.2.5", features = ["unproven"] }
-defmt = { version = "0.3.2" }
+cortex-m = { version = "0.7.7" }
+cortex-m-rt = { version = "0.7.4" }
+defmt = { version = "0.3.6" }
 defmt-rtt = { version = "0.4.0" }
-panic-probe = { version = "0.3.0", features = ["print-defmt"] }
-pimoroni_badger2040 = { version = "0.4.0" }
+embedded-hal = { version = "1.0.0" }
+panic-probe = { version = "0.3.1", features = ["print-defmt"] }
+rp-pico = { version = "0.9.0" }
 
 # cargo build/run
 [profile.dev]

@@ -10,10 +10,10 @@ use bsp::{
     pac,
 };
 use defmt::*;
-use defmt_rtt as _;
-use embedded_hal::digital::v2::OutputPin;
-use panic_probe as _;
-use pimoroni_badger2040 as bsp;
+use embedded_hal::digital::OutputPin;
+use rp_pico as bsp;
+#[allow(unused_imports)]
+use {defmt_rtt as _, panic_probe as _};
 
 #[entry]
 fn main() -> ! {
