@@ -1,6 +1,8 @@
 #![no_std]
 #![no_main]
 
+mod task;
+
 use bsp::{
     entry,
     hal::{
