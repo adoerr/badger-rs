@@ -51,6 +51,8 @@ fn main() -> ! {
 
     stack_start();
 
+    info!("current stack pointer: {:?}", task::stack_ptr() as usize);
+
     let mut led_pin = pins.led.into_push_pull_output();
 
     loop {
