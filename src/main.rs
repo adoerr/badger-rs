@@ -17,7 +17,7 @@ use {defmt_rtt as _, panic_probe as _};
 
 #[entry]
 fn main() -> ! {
-    info!("init badger");
+    info!("init board");
 
     let mut pac = pac::Peripherals::take().unwrap();
     let core = pac::CorePeripherals::take().unwrap();
@@ -47,16 +47,23 @@ fn main() -> ! {
         &mut pac.RESETS,
     );
 
+    stack_start();
+
     let mut led_pin = pins.led.into_push_pull_output();
 
     loop {
-        info!("on!");
         led_pin.set_high().unwrap();
         delay.delay_ms(500);
-
-        info!("off!");
 
         led_pin.set_low().unwrap();
         delay.delay_ms(500);
     }
+}
+
+extern "C" {
+    static _stack_start: u8;
+}
+fn stack_start() {
+    let stack_start = unsafe { &_stack_start as *const _ as usize };
+    info!("address of _stack_start: {:?}", stack_start);
 }
