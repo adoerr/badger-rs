@@ -40,6 +40,15 @@ pub fn stack_ptr() -> *mut u32 {
     sp
 }
 
+/// Set the current stack pointer to the given address
+#[allow(unused)]
+#[inline(always)]
+pub fn set_stack_ptr(addr: *mut u32) {
+    unsafe {
+        asm!("mov sp, {}", in(reg) addr);
+    }
+}
+
 /// Initialize scheduler
 pub fn init_scheduler() {
     info!("init scheduler with stack pointer: {:?}", stack_ptr());
