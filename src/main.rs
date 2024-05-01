@@ -1,29 +1,29 @@
 #![no_std]
 #![no_main]
 
-mod task;
-
-use bsp::{
-    entry,
-    hal::{clocks::init_clocks_and_plls, Watchdog},
-    pac,
+use defmt::info;
+use embedded_hal::digital::OutputPin;
+use rp_pico::{
+    entry, hal,
+    hal::{pac, prelude::*},
 };
-use defmt::*;
-use rp_pico as bsp;
 #[allow(unused_imports)]
 use {defmt_rtt as _, panic_probe as _};
 
 #[entry]
 fn main() -> ! {
-    info!("init board");
+    info!("board init");
 
+    // singleton objects
     let mut pac = pac::Peripherals::take().unwrap();
-    let mut watchdog = Watchdog::new(pac.WATCHDOG);
+    let core = pac::CorePeripherals::take().unwrap();
 
-    // External high-speed crystal on the pico board is 12Mhz
-    let external_xtal_freq_hz = 12_000_000u32;
-    let _ = init_clocks_and_plls(
-        external_xtal_freq_hz,
+    // set up the watchdog driver - needed by the clock setup code
+    let mut watchdog = hal::Watchdog::new(pac.WATCHDOG);
+
+    // clock default is to generate a 125 MHz system clock
+    let clocks = hal::clocks::init_clocks_and_plls(
+        rp_pico::XOSC_CRYSTAL_FREQ,
         pac.XOSC,
         pac.CLOCKS,
         pac.PLL_SYS,
@@ -34,8 +34,23 @@ fn main() -> ! {
     .ok()
     .unwrap();
 
-    info!("main stack pointer: {:?}", task::stack_ptr() as usize);
+    let mut delay = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
-    task::init_scheduler();
-    task::task_switch()
+    let sio = hal::Sio::new(pac.SIO);
+
+    let pins = rp_pico::Pins::new(
+        pac.IO_BANK0,
+        pac.PADS_BANK0,
+        sio.gpio_bank0,
+        &mut pac.RESETS,
+    );
+
+    let mut led_pin = pins.led.into_push_pull_output();
+
+    loop {
+        led_pin.set_high().unwrap();
+        delay.delay_ms(500);
+        led_pin.set_low().unwrap();
+        delay.delay_ms(500);
+    }
 }
