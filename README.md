@@ -1,4 +1,4 @@
-# 🦡 badger-rs 🦡
+# 🦡 badger-rs 🦀
 
 The [Pimoroni Badger 2040](https://shop.pimoroni.com/products/badger-2040) is a hackable, programmable
 badge with an EInk® display, powered by a [Raspberry Pi RP2040](https://www.raspberrypi.com/documentation/microcontrollers/rp2040.html)
