@@ -1,21 +1,6 @@
-[package]
-name = "badger-rs"
-version = "0.0.1"
-authors = ["Andreas Doerr"]
-description = "Firmware for the Pimoroni 2040"
-repository = "https://github.com/adoerr/badger-rs.git"
-license = "GPL-3.0-only"
-edition = "2021"
-readme = "README.md"
-keywords = ["firmware", "RP2040", "eInk"]
-categories = ["embedded", "hardware-support"]
+[workspace]
+members = [
+    "apps/blinky"
+]
 
-[dependencies]
-cortex-m = { version = "0.7.7" }
-cortex-m-rt = { version = "0.7.4" }
-defmt = { version = "0.3.6" }
-defmt-rtt = { version = "0.4.0" }
-embedded-hal = { version = "1.0.0" }
-panic-probe = { version = "0.3.1", features = ["print-defmt"] }
-rp-pico = { version = "0.9.0" }
-
+resolver = "2"
