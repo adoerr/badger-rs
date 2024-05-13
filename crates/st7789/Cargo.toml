@@ -1,5 +1,5 @@
 [package]
-name = "uc8151"
+name = "st7789"
 version = "0.1.0"
 edition = "2021"
 

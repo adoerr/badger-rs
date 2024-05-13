@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "apps/blinky",
-    "crates/uc8151"]
+    "crates/st7789"
+]
 
 resolver = "2"

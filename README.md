@@ -1,12 +1,11 @@
-# 🦡 badger-rs 🦀
+# 🐿️ squirrel-rs 🦀
 
-The [Pimoroni Badger 2040](https://shop.pimoroni.com/products/badger-2040) is a hackable, programmable
-badge with an EInk® display, powered by a [Raspberry Pi RP2040](https://www.raspberrypi.com/documentation/microcontrollers/rp2040.html)
+The [Pico Display Pack 2.0](https://shop.pimoroni.com/products/pico-display-pack-2-0) is an 18-bit capable 320X240 pixel IPS display.
 
 <br>
 
 <p align="center">
-    <img src="./badger2040.png" widht="500" height="300">
+    <img src="./pico-display-pack-20.jpg" widht="500" height="300">
 </p>
 
 <br>
