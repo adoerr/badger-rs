@@ -13,5 +13,7 @@ categories = ["embedded", "hardware-support"]
 cortex-m-rt = { version = "0.7.4" }
 
 cortex-m = { workspace = true }
+defmt = { workspace = true }
+defmt-rtt = { workspace = true }
 panic-probe = { workspace = true }
 rp-pico = { workspace = true }
