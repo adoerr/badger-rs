@@ -1,7 +1,14 @@
 [workspace]
 members = [
     "apps/blinky",
+    "apps/ferris",
     "crates/st7789"
 ]
 
 resolver = "2"
+
+[workspace.dependencies]
+cortex-m = { version = "0.7.7" }
+cortex-m-rt = { version = "0.7.4" }
+panic-probe = { version = "0.3.1", features = ["print-defmt"] }
+rp-pico = { version = "0.9.0" }
