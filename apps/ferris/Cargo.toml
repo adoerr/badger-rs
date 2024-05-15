@@ -10,10 +10,10 @@ keywords = ["firmware", "RP2040", "Pimoroni"]
 categories = ["embedded", "hardware-support"]
 
 [dependencies]
-cortex-m-rt = { version = "0.7.4" }
-
 cortex-m = { workspace = true }
+cortex-m-rt = { workspace = true }
 defmt = { workspace = true }
 defmt-rtt = { workspace = true }
+embedded-hal = { workspace = true }
 panic-probe = { workspace = true }
-rp-pico = { workspace = true }
+rp-pico = { workspace = true, features = ["rt"] }
