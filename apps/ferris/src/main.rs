@@ -2,8 +2,13 @@
 #![no_main]
 
 use defmt::info;
-use embedded_hal::digital::OutputPin;
-use rp_pico::{entry, hal, hal::Clock, pac};
+use display_interface_spi::SPIInterface;
+use embedded_hal::{digital::OutputPin, spi::MODE_3};
+use rp_pico::{
+    entry, hal,
+    hal::{fugit::RateExtU32, gpio::FunctionSpi, Clock, Spi},
+    pac,
+};
 #[allow(unused_imports)]
 use {defmt_rtt as _, panic_probe as _};
 
@@ -11,9 +16,9 @@ use {defmt_rtt as _, panic_probe as _};
 fn main() -> ! {
     info!("board init");
 
-    // get RP2040 peripherals
+    // RP2040 peripherals
     let mut pac = pac::Peripherals::take().unwrap();
-    // ger Cortex-M core peripherals
+    // Cortex-M core peripherals
     let core = pac::CorePeripherals::take().unwrap();
     // watchdog peripheral needed for clock setup
     let mut watchdog = hal::Watchdog::new(pac.WATCHDOG);
@@ -46,6 +51,32 @@ fn main() -> ! {
 
     // pico on board LED
     let mut pico_led = pins.led.into_push_pull_output();
+    // display master out slave in
+    let lcd_mosi = pins.gpio19.into_function::<FunctionSpi>();
+    // display slave clock
+    let lcd_sclk = pins.gpio18.into_function::<FunctionSpi>();
+    // display direct current
+    let lcd_dc = pins.gpio16.into_push_pull_output();
+    // display chip select
+    let _lcd_cs = pins.gpio17.into_push_pull_output();
+    // display backlight enable
+    let _lcd_bl = pins.gpio20.into_push_pull_output();
+
+    // serial interface minimal clock cycle for a write command is 16ns -> 65__000_000 Hz
+    const SPI_BAUD: u32 = 65_000_000;
+
+    // SPI bus with 8 bits per data frame
+    let spi = Spi::<_, _, _, 8u8>::new(pac.SPI0, (lcd_mosi, lcd_sclk));
+    // init SPI bus in master mode
+    let spi = spi.init(
+        &mut pac.RESETS,
+        clocks.peripheral_clock.freq(),
+        SPI_BAUD.Hz(),
+        MODE_3,
+    );
+
+    // SPI display interface
+    let _di = SPIInterface::new(spi, lcd_dc);
 
     loop {
         pico_led.set_high().unwrap();

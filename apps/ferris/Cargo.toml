@@ -14,6 +14,7 @@ cortex-m = { workspace = true }
 cortex-m-rt = { workspace = true }
 defmt = { workspace = true }
 defmt-rtt = { workspace = true }
+display-interface-spi = { workspace = true }
 embedded-hal = { workspace = true }
 panic-probe = { workspace = true }
 rp-pico = { workspace = true, features = ["rt"] }
