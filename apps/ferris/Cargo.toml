@@ -18,3 +18,4 @@ display-interface-spi = { workspace = true }
 embedded-hal = { workspace = true }
 panic-probe = { workspace = true }
 rp-pico = { workspace = true, features = ["rt"] }
+st7789 = { workspace = true }
