@@ -56,7 +56,7 @@ fn main() -> ! {
     // display direct current
     let lcd_dc = pins.gpio16.into_push_pull_output();
     // display chip select
-    let lcd_cs = pins.gpio17.into_push_pull_output();
+    let _lcd_cs = pins.gpio17.into_push_pull_output();
     // display backlight enable
     let _lcd_bl = pins.gpio20.into_push_pull_output();
 
@@ -74,7 +74,7 @@ fn main() -> ! {
     );
 
     // create SPI display interface
-    let _di = SPIInterface::new(spi, lcd_dc, lcd_cs);
+    let _di = SPIInterface::new(spi, lcd_dc);
     // create display driver
     //let mut lcd = ST7789::new(di, None, Some(lcd_bl), 320, 240);
 

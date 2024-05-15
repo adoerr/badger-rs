@@ -9,3 +9,5 @@ doctest = false
 test = false
 
 [dependencies]
+display-interface = { workspace = true }
+embedded-hal = { workspace = true }
