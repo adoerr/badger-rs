@@ -1,5 +1,7 @@
 #![no_std]
+#![allow(dead_code)]
 
-// Resolution 128X296 1bit per pixel
-pub const WIDTH: u32 = 296;
-pub const HEIGHT: u32 = 128;
+mod types;
+
+pub const WIDTH: u32 = 320;
+pub const HEIGHT: u32 = 240;
