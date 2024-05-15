@@ -9,6 +9,7 @@ use rp_pico::{
     hal::{fugit::RateExtU32, gpio::FunctionSpi, Clock, Spi},
     pac,
 };
+use st7789::ST7789;
 #[allow(unused_imports)]
 use {defmt_rtt as _, panic_probe as _};
 
@@ -58,7 +59,7 @@ fn main() -> ! {
     // display chip select
     let _lcd_cs = pins.gpio17.into_push_pull_output();
     // display backlight enable
-    let _lcd_bl = pins.gpio20.into_push_pull_output();
+    let lcd_bl = pins.gpio20.into_push_pull_output();
 
     // serial interface minimal clock cycle for a write command is 16ns -> 65__000_000 Hz
     const SPI_BAUD: u32 = 65_000_000;
@@ -74,15 +75,15 @@ fn main() -> ! {
     );
 
     // create SPI display interface
-    let _di = SPIInterface::new(spi, lcd_dc);
+    let di = SPIInterface::new(spi, lcd_dc);
     // create display driver
-    //let mut lcd = ST7789::new(di, None, Some(lcd_bl), 320, 240);
+    let mut lcd = ST7789::new(di, lcd_bl);
 
     // delay provider for the display driver
     let mut delay = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
     // initialize the display driver
-    //lcd.init(&mut delay).unwrap();
+    lcd.init(&mut delay);
     //lcd.set_orientation(Orientation::Landscape).unwrap();
 
     loop {

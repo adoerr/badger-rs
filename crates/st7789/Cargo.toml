@@ -9,5 +9,7 @@ doctest = false
 test = false
 
 [dependencies]
+cortex-m = { workspace = true }
 display-interface = { workspace = true }
+display-interface-spi = { workspace = true }
 embedded-hal = { workspace = true }

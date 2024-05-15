@@ -3,8 +3,9 @@
 
 use core::iter::once;
 
+use cortex_m::delay::Delay;
 use display_interface::{DataFormat::U8Iter, WriteOnlyDataCommand};
-use embedded_hal::{delay::DelayNs, digital::OutputPin};
+use embedded_hal::digital::OutputPin;
 
 use crate::types::{Instruction, Orientation};
 
@@ -49,7 +50,7 @@ where
     }
 
     /// Initialize the display
-    pub fn init(&mut self, delay: &mut impl DelayNs) {
+    pub fn init(&mut self, delay: &mut Delay) {
         self.write_command(Instruction::SWRESET);
         delay.delay_ms(150)
     }
