@@ -51,8 +51,18 @@ where
 
     /// Initialize the display
     pub fn init(&mut self, delay: &mut Delay) {
+        // backlight off / on
+        let _ = self.backlight.set_low().is_ok();
+        delay.delay_ms(10);
+        let _ = self.backlight.set_high().is_ok();
+        // software reset
         self.write_command(Instruction::SWRESET);
-        delay.delay_ms(150)
+        delay.delay_ms(150);
+        // sleep off
+        self.write_command(Instruction::SLPOUT);
+        delay.delay_ms(10);
+        // invert off
+        self.write_command(Instruction::INVOFF);
     }
 
     fn write_command(&mut self, command: Instruction) {
