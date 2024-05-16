@@ -2,7 +2,7 @@
 #![no_main]
 
 use defmt::info;
-use embedded_hal::digital::OutputPin;
+use embedded_hal::digital::v2::OutputPin;
 use rp_pico::{
     entry, hal,
     hal::{pac, prelude::*},

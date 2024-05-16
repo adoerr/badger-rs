@@ -3,7 +3,7 @@
 
 use defmt::info;
 use display_interface_spi::SPIInterface;
-use embedded_hal::{digital::OutputPin, spi::MODE_3};
+use embedded_hal::{digital::v2::OutputPin, spi::MODE_3};
 use rp_pico::{
     entry, hal,
     hal::{fugit::RateExtU32, gpio::FunctionSpi, Clock, Spi},
@@ -57,7 +57,7 @@ fn main() -> ! {
     // display direct current
     let lcd_dc = pins.gpio16.into_push_pull_output();
     // display chip select
-    let _lcd_cs = pins.gpio17.into_push_pull_output();
+    let lcd_cs = pins.gpio17.into_push_pull_output();
     // display backlight enable
     let lcd_bl = pins.gpio20.into_push_pull_output();
 
@@ -75,7 +75,7 @@ fn main() -> ! {
     );
 
     // create SPI display interface
-    let di = SPIInterface::new(spi, lcd_dc);
+    let di = SPIInterface::new(spi, lcd_dc, lcd_cs);
     // create display driver
     let mut lcd = ST7789::new(di, lcd_bl);
 

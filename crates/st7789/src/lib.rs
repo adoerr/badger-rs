@@ -5,7 +5,7 @@ use core::iter::once;
 
 use cortex_m::delay::Delay;
 use display_interface::{DataFormat::U8Iter, WriteOnlyDataCommand};
-use embedded_hal::digital::OutputPin;
+use embedded_hal::digital::v2::OutputPin;
 
 use crate::types::{Instruction, Orientation};
 

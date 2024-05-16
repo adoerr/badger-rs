@@ -43,16 +43,16 @@ dependencies = [
  "cortex-m-rt",
  "defmt",
  "defmt-rtt",
- "embedded-hal 1.0.0",
+ "embedded-hal 0.2.7",
  "panic-probe",
  "rp-pico",
 ]
 
 [[package]]
 name = "byte-slice-cast"
-version = "1.2.2"
+version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c3ac9f8b63eca6fd385229b3675f6cc0dc5c8a5c8a54a59d4f52ffd670d87b0c"
+checksum = "b0a5e3906bcbf133e33c1d4d95afc664ad37fbdb9f6568d8043e7ea8c27d93d3"
 
 [[package]]
 name = "byteorder"
@@ -157,20 +157,19 @@ dependencies = [
 
 [[package]]
 name = "display-interface"
-version = "0.5.0"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7ba2aab1ef3793e6f7804162debb5ac5edb93b3d650fbcc5aeb72fcd0e6c03a0"
+checksum = "7517c040926d7b02b111884aa089177db80878533127f7c1b480d852c5fb4112"
 
 [[package]]
 name = "display-interface-spi"
-version = "0.5.0"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f86b9ec30048b1955da2038fcc3c017f419ab21bb0001879d16c0a3749dc6b7a"
+checksum = "489378ad054862146fbd1f09f51d585ccbe4bd1e2feadcda2a13ac33f840e1a5"
 dependencies = [
  "byte-slice-cast",
  "display-interface",
- "embedded-hal 1.0.0",
- "embedded-hal-async",
+ "embedded-hal 0.2.7",
 ]
 
 [[package]]
@@ -239,7 +238,7 @@ dependencies = [
  "defmt-rtt",
  "display-interface",
  "display-interface-spi",
- "embedded-hal 1.0.0",
+ "embedded-hal 0.2.7",
  "panic-probe",
  "rp-pico",
  "st7789",
@@ -549,7 +548,7 @@ dependencies = [
  "cortex-m",
  "display-interface",
  "display-interface-spi",
- "embedded-hal 1.0.0",
+ "embedded-hal 0.2.7",
 ]
 
 [[package]]
