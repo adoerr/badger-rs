@@ -10,11 +10,11 @@ keywords = ["firmware", "RP2040", "Pimoroni"]
 categories = ["embedded", "hardware-support"]
 
 [dependencies]
-cortex-m = { version = "0.7.7" }
-cortex-m-rt = { version = "0.7.4" }
-defmt = { version = "0.3.6" }
-defmt-rtt = { version = "0.4.0" }
+cortex-m = { workspace = true }
+cortex-m-rt = { workspace = true }
+defmt = { workspace = true }
+defmt-rtt = { workspace = true }
 embedded-hal = { workspace = true }
-panic-probe = { version = "0.3.1", features = ["print-defmt"] }
-rp-pico = { version = "0.9.0" }
+panic-probe = { workspace = true, features = ["print-defmt"] }
+rp-pico = { workspace = true }
 
