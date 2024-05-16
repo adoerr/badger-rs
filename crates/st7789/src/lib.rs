@@ -23,9 +23,9 @@ where
     BL: OutputPin,
 {
     // display interface
-    display_interface: DI,
+    di: DI,
     // backlight pin
-    backlight: BL,
+    bl: BL,
     // current orientation
     orientation: Orientation,
 }
@@ -36,10 +36,10 @@ where
     BL: OutputPin,
 {
     /// Create a new ST7789 driver
-    pub fn new(display_interface: DI, backlight: BL) -> Self {
+    pub fn new(di: DI, bl: BL) -> Self {
         Self {
-            display_interface,
-            backlight,
+            di,
+            bl,
             orientation: Orientation::Portrait,
         }
     }
@@ -51,23 +51,40 @@ where
 
     /// Initialize the display
     pub fn init(&mut self, delay: &mut Delay) {
-        // backlight off / on
-        let _ = self.backlight.set_low().is_ok();
+        // backlight off
+        let _ = self.bl.set_low().is_ok();
         delay.delay_ms(10);
-        let _ = self.backlight.set_high().is_ok();
+        // backlight on
+        let _ = self.bl.set_high().is_ok();
         // software reset
         self.write_command(Instruction::SWRESET);
         delay.delay_ms(150);
-        // sleep off
+        // sleep out
         self.write_command(Instruction::SLPOUT);
         delay.delay_ms(10);
-        // invert off
+        // display inversion off
         self.write_command(Instruction::INVOFF);
+        // pixel and color format
+        self.write_command(Instruction::COLMOD);
+        // 65K colors and 16 bit/pixel
+        self.write_data(&[0b0101_0101]);
+        // normal display mode on (no partial mode)
+        self.write_command(Instruction::NORON);
+        delay.delay_ms(10);
+        // display on
+        self.write_command(Instruction::DISPON);
+        delay.delay_ms(10);
     }
 
     fn write_command(&mut self, command: Instruction) {
-        self.display_interface
+        self.di
             .send_commands(U8Iter(&mut once(command as u8)))
             .unwrap();
+    }
+
+    fn write_data(&mut self, data: &[u8]) {
+        self.di
+            .send_data(U8Iter(&mut data.iter().cloned()))
+            .unwrap()
     }
 }

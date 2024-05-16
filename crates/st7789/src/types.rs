@@ -52,7 +52,7 @@ pub enum Instruction {
     MADCTL = 0x36,
     /// Vertical scrolling start address
     VSCRSADD = 0x37,
-    /// Interface pixel format
+    /// Interface pixel and color format
     COLMOD = 0x3A,
     /// Voltage common offset set
     VCMOFSET = 0xC5,
