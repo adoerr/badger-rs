@@ -1,56 +1,26 @@
 #![no_std]
 #![no_main]
 
-use defmt::info;
-use embedded_hal::digital::v2::OutputPin;
-use rp_pico::{
-    entry, hal,
-    hal::{pac, prelude::*},
-};
+use defmt::*;
+use embassy_executor::Spawner;
+use embassy_rp::gpio;
+use embassy_time::Timer;
+use gpio::{Level, Output};
 #[allow(unused_imports)]
 use {defmt_rtt as _, panic_probe as _};
 
-#[entry]
-fn main() -> ! {
-    info!("board init");
-
-    // singleton objects
-    let mut pac = pac::Peripherals::take().unwrap();
-    let core = pac::CorePeripherals::take().unwrap();
-
-    // set up the watchdog driver - needed by the clock setup code
-    let mut watchdog = hal::Watchdog::new(pac.WATCHDOG);
-
-    // clock default is to generate a 125 MHz system clock
-    let clocks = hal::clocks::init_clocks_and_plls(
-        rp_pico::XOSC_CRYSTAL_FREQ,
-        pac.XOSC,
-        pac.CLOCKS,
-        pac.PLL_SYS,
-        pac.PLL_USB,
-        &mut pac.RESETS,
-        &mut watchdog,
-    )
-    .ok()
-    .unwrap();
-
-    let mut delay = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
-
-    let sio = hal::Sio::new(pac.SIO);
-
-    let pins = rp_pico::Pins::new(
-        pac.IO_BANK0,
-        pac.PADS_BANK0,
-        sio.gpio_bank0,
-        &mut pac.RESETS,
-    );
-
-    let mut led_pin = pins.led.into_push_pull_output();
+#[embassy_executor::main]
+async fn main(_spawner: Spawner) {
+    let p = embassy_rp::init(Default::default());
+    let mut led = Output::new(p.PIN_25, Level::Low);
 
     loop {
-        led_pin.set_high().unwrap();
-        delay.delay_ms(500);
-        led_pin.set_low().unwrap();
-        delay.delay_ms(500);
+        info!("led on!");
+        led.set_high();
+        Timer::after_secs(1).await;
+
+        info!("led off!");
+        led.set_low();
+        Timer::after_secs(1).await;
     }
 }
