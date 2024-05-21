@@ -50,30 +50,22 @@ where
     }
 
     /// Initialize the display
+    ///
+    /// For now just do a software reset and turn on the display
     pub fn init(&mut self, delay: &mut Delay) {
         // backlight off
         let _ = self.bl.set_low().is_ok();
         delay.delay_ms(10);
-        // backlight on
-        let _ = self.bl.set_high().is_ok();
+
         // software reset
         self.write_command(Instruction::SWRESET);
         delay.delay_ms(150);
-        // sleep out
-        self.write_command(Instruction::SLPOUT);
-        delay.delay_ms(10);
-        // display inversion off
-        self.write_command(Instruction::INVOFF);
-        // pixel and color format
-        self.write_command(Instruction::COLMOD);
-        // 65K colors and 16 bit/pixel
-        self.write_data(&[0b0101_0101]);
-        // normal display mode on (no partial mode)
-        self.write_command(Instruction::NORON);
-        delay.delay_ms(10);
         // display on
         self.write_command(Instruction::DISPON);
         delay.delay_ms(10);
+
+        // backlight on
+        let _ = self.bl.set_high().is_ok();
     }
 
     fn write_command(&mut self, command: Instruction) {
