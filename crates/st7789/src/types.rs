@@ -22,7 +22,7 @@ pub enum Instruction {
     SLPOUT = 0x11,
     /// Partial mode on
     PTLON = 0x12,
-    /// Partial mode off (Normal)
+    ///   mode off (Normal)
     NORON = 0x13,
     /// Display inversion off
     INVOFF = 0x20,
