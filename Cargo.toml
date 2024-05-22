@@ -14,6 +14,7 @@ defmt-rtt = { version = "0.4.0" }
 embedded-hal = { version = "1.0.0" }
 panic-probe = { version = "0.3.1", features = ["print-defmt"] }
 portable-atomic = { version = "1.6.0", features = ["critical-section"] }
+usbd-hid = { version = "0.7.0" }
 
 embassy-embedded-hal = { version = "0.1.0", features = ["defmt"] }
 embassy-executor = { version = "0.5.0", features = ["task-arena-size-32768", "arch-cortex-m", "executor-thread", "executor-interrupt", "defmt", "integrated-timers"] }
@@ -21,6 +22,7 @@ embassy-futures = { version = "0.1.1", features = ["defmt"] }
 embassy-rp = { version = "0.1.0", features = ["defmt", "unstable-pac", "time-driver", "critical-section-impl"] }
 embassy-sync = { version = "0.5.0", features = ["defmt"] }
 embassy-time = { version = "0.3.0", features = ["defmt", "defmt-timestamp-uptime"] }
+embassy-usb = { version = "0.2.0", features = ["defmt"] }
 
 [patch.crates-io]
 embassy-embedded-hal = { git = "https://github.com/embassy-rs/embassy", branch = "main" }
@@ -29,3 +31,4 @@ embassy-futures = { git = "https://github.com/embassy-rs/embassy", branch = "mai
 embassy-rp = { git = "https://github.com/embassy-rs/embassy", branch = "main" }
 embassy-sync = { git = "https://github.com/embassy-rs/embassy", branch = "main" }
 embassy-time = { git = "https://github.com/embassy-rs/embassy", branch = "main" }
+embassy-usb = { git = "https://github.com/embassy-rs/embassy", branch = "main" }
