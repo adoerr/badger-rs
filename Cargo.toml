@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "apps/blinky",
+    "apps/hid-keyboard"
 ]
 
 resolver = "2"

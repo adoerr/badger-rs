@@ -311,7 +311,7 @@ checksum = "3dca9240753cf90908d7e4aac30f630662b02aebaa1b58a3cadabdb23385b58b"
 [[package]]
 name = "embassy-embedded-hal"
 version = "0.1.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#bb82a1bd607d717d845baa5d6d473f53ee17b43e"
+source = "git+https://github.com/embassy-rs/embassy?branch=main#4e2296e34458382be4b548fa10e5f6a782059e8d"
 dependencies = [
  "embassy-futures",
  "embassy-sync",
@@ -327,7 +327,7 @@ dependencies = [
 [[package]]
 name = "embassy-executor"
 version = "0.5.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#bb82a1bd607d717d845baa5d6d473f53ee17b43e"
+source = "git+https://github.com/embassy-rs/embassy?branch=main#4e2296e34458382be4b548fa10e5f6a782059e8d"
 dependencies = [
  "cortex-m",
  "critical-section",
@@ -341,7 +341,7 @@ dependencies = [
 [[package]]
 name = "embassy-executor-macros"
 version = "0.4.1"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#bb82a1bd607d717d845baa5d6d473f53ee17b43e"
+source = "git+https://github.com/embassy-rs/embassy?branch=main#4e2296e34458382be4b548fa10e5f6a782059e8d"
 dependencies = [
  "darling",
  "proc-macro2",
@@ -352,12 +352,12 @@ dependencies = [
 [[package]]
 name = "embassy-futures"
 version = "0.1.1"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#bb82a1bd607d717d845baa5d6d473f53ee17b43e"
+source = "git+https://github.com/embassy-rs/embassy?branch=main#4e2296e34458382be4b548fa10e5f6a782059e8d"
 
 [[package]]
 name = "embassy-hal-internal"
 version = "0.1.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#bb82a1bd607d717d845baa5d6d473f53ee17b43e"
+source = "git+https://github.com/embassy-rs/embassy?branch=main#4e2296e34458382be4b548fa10e5f6a782059e8d"
 dependencies = [
  "cortex-m",
  "critical-section",
@@ -368,7 +368,7 @@ dependencies = [
 [[package]]
 name = "embassy-rp"
 version = "0.1.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#bb82a1bd607d717d845baa5d6d473f53ee17b43e"
+source = "git+https://github.com/embassy-rs/embassy?branch=main#4e2296e34458382be4b548fa10e5f6a782059e8d"
 dependencies = [
  "atomic-polyfill",
  "cfg-if",
@@ -404,7 +404,7 @@ dependencies = [
 [[package]]
 name = "embassy-sync"
 version = "0.5.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#bb82a1bd607d717d845baa5d6d473f53ee17b43e"
+source = "git+https://github.com/embassy-rs/embassy?branch=main#4e2296e34458382be4b548fa10e5f6a782059e8d"
 dependencies = [
  "cfg-if",
  "critical-section",
@@ -416,7 +416,7 @@ dependencies = [
 [[package]]
 name = "embassy-time"
 version = "0.3.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#bb82a1bd607d717d845baa5d6d473f53ee17b43e"
+source = "git+https://github.com/embassy-rs/embassy?branch=main#4e2296e34458382be4b548fa10e5f6a782059e8d"
 dependencies = [
  "cfg-if",
  "critical-section",
@@ -434,7 +434,7 @@ dependencies = [
 [[package]]
 name = "embassy-time-driver"
 version = "0.1.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#bb82a1bd607d717d845baa5d6d473f53ee17b43e"
+source = "git+https://github.com/embassy-rs/embassy?branch=main#4e2296e34458382be4b548fa10e5f6a782059e8d"
 dependencies = [
  "document-features",
 ]
@@ -442,12 +442,12 @@ dependencies = [
 [[package]]
 name = "embassy-time-queue-driver"
 version = "0.1.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#bb82a1bd607d717d845baa5d6d473f53ee17b43e"
+source = "git+https://github.com/embassy-rs/embassy?branch=main#4e2296e34458382be4b548fa10e5f6a782059e8d"
 
 [[package]]
 name = "embassy-usb-driver"
 version = "0.1.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#bb82a1bd607d717d845baa5d6d473f53ee17b43e"
+source = "git+https://github.com/embassy-rs/embassy?branch=main#4e2296e34458382be4b548fa10e5f6a782059e8d"
 dependencies = [
  "defmt",
 ]
@@ -631,6 +631,19 @@ name = "hermit-abi"
 version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d231dfb89cfffdbc30e7fc41579ed6066ad03abda9e567ccafae602b97ec5024"
+
+[[package]]
+name = "hid-keyboard"
+version = "0.0.1"
+dependencies = [
+ "cortex-m-rt",
+ "defmt",
+ "defmt-rtt",
+ "embassy-executor",
+ "embassy-rp",
+ "embassy-time",
+ "panic-probe",
+]
 
 [[package]]
 name = "ident_case"

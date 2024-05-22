@@ -1,0 +1,20 @@
+[package]
+name = "hid-keyboard"
+version = "0.0.1"
+authors = ["Andreas Doerr"]
+description = "Firmware for the Pimoroni 2040"
+repository = "https://github.com/adoerr/badger-rs.git"
+license = "GPL-3.0-only"
+edition = "2021"
+keywords = ["firmware", "RP2040", "Pimoroni"]
+categories = ["embedded", "hardware-support"]
+
+[dependencies]
+cortex-m-rt = { workspace = true }
+defmt = { workspace = true }
+defmt-rtt = { workspace = true }
+embassy-executor = { workspace = true }
+embassy-rp = { workspace = true }
+embassy-time = { workspace = true }
+panic-probe = { workspace = true, features = ["print-defmt"] }
+
