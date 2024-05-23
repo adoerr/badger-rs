@@ -1,7 +1,8 @@
 [workspace]
 members = [
     "apps/blinky",
-    "apps/hid-keyboard"
+    "apps/hid-keyboard",
+    "apps/usb-serial"
 ]
 
 resolver = "2"
@@ -14,6 +15,7 @@ defmt-rtt = { version = "0.4.0" }
 embedded-hal = { version = "1.0.0" }
 panic-probe = { version = "0.3.1", features = ["print-defmt"] }
 portable-atomic = { version = "1.6.0", features = ["critical-section"] }
+static_cell = { version = "2.1.0" }
 usbd-hid = { version = "0.7.0" }
 
 embassy-embedded-hal = { version = "0.1.0", features = ["defmt"] }
