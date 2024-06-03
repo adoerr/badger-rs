@@ -1,17 +1,21 @@
 [workspace]
 members = [
     "device/usb-raw",
-    "host/list"
+    "host/lsusb"
 ]
 
 resolver = "2"
 
 [workspace.dependencies]
+anyhow = { version = "1.0.86" }
 cortex-m = { version = "0.7.7" }
 cortex-m-rt = { version = "0.7.3" }
 defmt = { version = "0.3.6" }
 defmt-rtt = { version = "0.4.0" }
 embedded-hal = { version = "1.0.0" }
+env_logger = { version = "0.11.3" }
+log = { version = "0.4.21" }
+nusb = { version = "0.1.9" }
 panic-probe = { version = "0.3.1", features = ["print-defmt"] }
 portable-atomic = { version = "1.6.0", features = ["critical-section"] }
 static_cell = { version = "2.1.0" }
