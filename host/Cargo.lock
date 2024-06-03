@@ -279,10 +279,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "usb-raw"
-version = "0.1.0"
-
-[[package]]
 name = "utf8parse"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -426,38 +422,3 @@ name = "windows_x86_64_msvc"
 version = "0.52.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bec47e5bfd1bff0eeaf6d8b485cc1074891a197ab4225d504cb7a1ab88b02bf0"
-
-[[patch.unused]]
-name = "embassy-embedded-hal"
-version = "0.1.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#ecd7888ba937b74560d3a1975445441d7c07be17"
-
-[[patch.unused]]
-name = "embassy-executor"
-version = "0.5.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#ecd7888ba937b74560d3a1975445441d7c07be17"
-
-[[patch.unused]]
-name = "embassy-futures"
-version = "0.1.1"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#ecd7888ba937b74560d3a1975445441d7c07be17"
-
-[[patch.unused]]
-name = "embassy-rp"
-version = "0.1.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#ecd7888ba937b74560d3a1975445441d7c07be17"
-
-[[patch.unused]]
-name = "embassy-sync"
-version = "0.6.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#ecd7888ba937b74560d3a1975445441d7c07be17"
-
-[[patch.unused]]
-name = "embassy-time"
-version = "0.3.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#ecd7888ba937b74560d3a1975445441d7c07be17"
-
-[[patch.unused]]
-name = "embassy-usb"
-version = "0.2.0"
-source = "git+https://github.com/embassy-rs/embassy?branch=main#ecd7888ba937b74560d3a1975445441d7c07be17"

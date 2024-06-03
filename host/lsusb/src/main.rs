@@ -2,14 +2,14 @@ use anyhow::{anyhow, Result};
 use log::info;
 
 const USB_VENDOR_ID: u16 = 0x4242;
-const USB0_PRODUCT_ID: u16 = 0x4242;
+const USB_PRODUCT_ID: u16 = 0x4242;
 
 fn main() -> Result<()> {
     env_logger::init();
 
     // check the available devices and pick the GreatFET One
     let device_info = nusb::list_devices()?
-        .find(|info| info.vendor_id() == USB_VENDOR_ID && info.product_id() == USB0_PRODUCT_ID)
+        .find(|info| info.vendor_id() == USB_VENDOR_ID && info.product_id() == USB_PRODUCT_ID)
         .ok_or(anyhow!("Device not found"))?;
 
     info!("Device: {}", device_info.product_string().unwrap());
