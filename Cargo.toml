@@ -1,8 +1,7 @@
 [workspace]
 members = [
-    "apps/blinky",
-    "apps/hid-keyboard",
-    "apps/usb-serial"
+    "device/usb-raw",
+    "host/list"
 ]
 
 resolver = "2"
@@ -22,7 +21,7 @@ embassy-embedded-hal = { version = "0.1.0", features = ["defmt"] }
 embassy-executor = { version = "0.5.0", features = ["task-arena-size-32768", "arch-cortex-m", "executor-thread", "executor-interrupt", "defmt", "integrated-timers"] }
 embassy-futures = { version = "0.1.1", features = ["defmt"] }
 embassy-rp = { version = "0.1.0", features = ["defmt", "unstable-pac", "time-driver", "critical-section-impl"] }
-embassy-sync = { version = "0.5.0", features = ["defmt"] }
+embassy-sync = { version = "0.6.0", features = ["defmt"] }
 embassy-time = { version = "0.3.0", features = ["defmt", "defmt-timestamp-uptime"] }
 embassy-usb = { version = "0.2.0", features = ["defmt"] }
 
