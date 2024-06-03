@@ -18,3 +18,17 @@ check:
     cd host && \
     cargo +nightly fmt --all && \
     cargo +nightly clippy --workspace --all-features -- -D warnings
+
+update:
+    cd device && cargo update
+    cd host && cargo update
+
+outdated:
+    cd device && cargo outdated -R
+    cd host && cargo outdated -R
+
+flash binary:
+    cd device && cargo run --bin {{binary}}
+
+run binary:
+    cd host && cargo run --bin {{binary}}
