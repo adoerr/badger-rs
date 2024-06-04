@@ -3,25 +3,25 @@ use futures_lite::future::block_on;
 use log::info;
 use nusb::transfer::{ControlIn, ControlOut, ControlType, Recipient};
 
-const USB_VENDOR_ID: u16 = 0x4242;
-const USB_PRODUCT_ID: u16 = 0x4242;
+const VENDOR_ID: u16 = 0x4242;
+const PRODUCT_ID: u16 = 0x4242;
 
 fn main() -> Result<()> {
     env_logger::init();
 
-    // check the available devices and pick the GreatFET One
-    let device_info = nusb::list_devices()?
-        .find(|info| info.vendor_id() == USB_VENDOR_ID && info.product_id() == USB_PRODUCT_ID)
+    let dev_info = nusb::list_devices()?
+        .find(|info| info.vendor_id() == VENDOR_ID && info.product_id() == PRODUCT_ID)
         .ok_or(anyhow!("Device not found"))?;
 
-    info!("Device: {}", device_info.product_string().unwrap());
-    info!("Serial: {}", device_info.serial_number().unwrap());
+    info!("Device: {}", dev_info.product_string().unwrap());
+    info!("Serial: {}", dev_info.serial_number().unwrap());
 
-    let device = device_info.open()?;
-    let iface = device.claim_interface(0)?;
+    // open device so we can interact with and claim interfaces
+    let dev = dev_info.open()?;
+    let iface = dev.claim_interface(0)?;
 
     // Send "hello world" to device
-    let result = block_on(iface.control_out(ControlOut {
+    let res = block_on(iface.control_out(ControlOut {
         control_type: ControlType::Vendor,
         recipient: Recipient::Interface,
         request: 100,
@@ -30,10 +30,10 @@ fn main() -> Result<()> {
         data: b"hello world",
     }));
 
-    info!("{result:?}");
+    info!("{res:?}");
 
     // Receive "hello" from device
-    let result = block_on(iface.control_in(ControlIn {
+    let res = block_on(iface.control_in(ControlIn {
         control_type: ControlType::Vendor,
         recipient: Recipient::Interface,
         request: 101,
@@ -42,7 +42,7 @@ fn main() -> Result<()> {
         length: 5,
     }));
 
-    info!("{result:?}");
+    info!("{res:?}");
 
     Ok(())
 }

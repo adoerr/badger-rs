@@ -30,5 +30,8 @@ outdated:
 flash binary:
     cd device && cargo run --bin {{binary}}
 
+attach binary:
+    probe-rs attach --chip RP2040 device/target/thumbv6m-none-eabi/debug/{{binary}}
+
 run binary:
-    cd host && cargo run --bin {{binary}}
+    cd host && RUST_LOG=info cargo run --bin {{binary}}
